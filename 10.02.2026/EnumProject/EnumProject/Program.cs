@@ -16,8 +16,13 @@ namespace EnumProject
 
             Console.WriteLine("----------------------------");
             //tehke uus enum Colors
+            //(int) - castimine ehk teisendab teiseks andmetüübiks
+            //juhul kui info võib kaduma minna ja ei näita soovitud tulemust
             Console.WriteLine(Colors.Green);
             Console.WriteLine((int)Colors.Green);
+
+            Console.WriteLine("----------------------------");
+
         }
 
         enum Weekdays
