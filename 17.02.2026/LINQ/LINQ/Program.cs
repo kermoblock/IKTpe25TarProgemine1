@@ -19,8 +19,11 @@ namespace LINQ
                     break;
 
                     case 2:
-                    WhereByNameLINQ();
-                     break;
+                        WhereByNameLINQ();
+                        break;
+
+                    case 3:
+
 
                     default:
                     break;
@@ -53,11 +56,6 @@ namespace LINQ
             {
                 Console.WriteLine(people.Name);
             }
-
-
-
-            
-
             //kasutada where inimese otsimiseks
             //otsimine toimub nime alusel
         }
