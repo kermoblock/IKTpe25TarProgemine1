@@ -13,6 +13,7 @@
             Console.WriteLine("Tee valik numbriga");
             Console.WriteLine("1. ThenByLinq");
             Console.WriteLine("2. ThenByDescending");
+            Console.WriteLine("3. SelectLINQ");
 
             int choice = int.Parse(Console.ReadLine());
 
@@ -66,6 +67,9 @@
 
         public static void SelectLINQ()
         {
+            //select lihtsalt annab andmed,
+            //ei mingit järjestust lihtsalt
+            //nii nagu need on andmebaasis
             var SelectLINQ = PeopleList.peoples
                 .Select(x => new
                 {
