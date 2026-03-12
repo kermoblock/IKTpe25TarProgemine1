@@ -1,0 +1,47 @@
+﻿namespace Inheritance
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Insert to numbers: ");
+            Console.WriteLine("First number: ");
+            int firstNr = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Second number: ");
+            int secondNr = Convert.ToInt32(Console.ReadLine());
+
+            Rectangle rectangle = new Rectangle();
+            rectangle.SetWidth(firstNr);
+            rectangle.SetHeight(secondNr);
+
+            Console.WriteLine("Total Area: {0}", rectangle.GetArea);
+        }
+    }
+
+    class Shape
+    {
+        public void SetWidth(int w)
+        {
+            width = w;
+        }
+
+        public void SetHeight(int h)
+        {
+            height = h;
+        }
+
+        protected int width;
+        protected int height;
+    }
+
+    //koolon tähendab pärimist
+    class Rectangle : Shape
+    {
+        public int GetArea()
+        {
+            //return tagastab infot selles meetodis toimunud loogika kohta
+            return (width * height);
+        }
+    }
+}
