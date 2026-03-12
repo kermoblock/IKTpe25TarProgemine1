@@ -15,7 +15,7 @@
             rectangle.SetWidth(firstNr);
             rectangle.SetHeight(secondNr);
 
-            Console.WriteLine("Total Area: {0}", rectangle.GetArea);
+            Console.WriteLine("Total Area: {0}", rectangle.GetArea());
         }
     }
 
@@ -36,6 +36,7 @@
     }
 
     //koolon tähendab pärimist
+    //läbi pärimise saame kasutada muutujaid width ja height, mis asuvad Shape classis
     class Rectangle : Shape
     {
         public int GetArea()
