@@ -11,5 +11,20 @@ namespace InheritanceAndServiceClass.AppServices.Services
         {
             Console.WriteLine("Car Services");
         }
+
+        public void SaveAsync()
+        {
+            Console.WriteLine("Andmed Edukalt Salvestatud");
+        }
+
+        public void UpdateData()
+        {
+            Console.WriteLine("Andmed Edukalt Uuendatud");
+        }
+
+        public void EraseData()
+        {
+            Console.WriteLine("Andmed Edukalt Kustutatud");
+        }
     }
 }

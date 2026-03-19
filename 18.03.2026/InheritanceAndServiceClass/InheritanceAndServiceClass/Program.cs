@@ -41,6 +41,36 @@ namespace InheritanceAndServiceClass
                     }
                     break;
 
+                case 2:
+                    var ap = builder.Build();
+                    using (var scope = ap.Services.CreateScope())
+                    {
+                        var carServices = scope.ServiceProvider.GetRequiredService<ICarServices>();
+                        var program = new Program(carServices);
+                        program.PostData();
+                    }
+                    break;
+
+                case 3:
+                    var a = builder.Build();
+                    using (var scope = a.Services.CreateScope())
+                    {
+                        var carServices = scope.ServiceProvider.GetRequiredService<ICarServices>();
+                        var program = new Program(carServices);
+                        program.PutData();
+                    }
+                    break;
+
+                case 4:
+                    var appp = builder.Build();
+                    using (var scope = appp.Services.CreateScope())
+                    {
+                        var carServices = scope.ServiceProvider.GetRequiredService<ICarServices>();
+                        var program = new Program(carServices);
+                        program.DeleteData();
+                    }
+                    break;
+
 
                 default:
                 Console.WriteLine("Error");
@@ -55,7 +85,28 @@ namespace InheritanceAndServiceClass
         return View();
         }
 
-    private IActionResult View()
+        public IActionResult PostData()
+        {
+            _carServices.SaveAsync();
+
+            return View();
+        }
+
+        public IActionResult PutData()
+        {
+            _carServices.UpdateData();
+
+            return View();
+        }
+
+        public IActionResult DeleteData()
+        {
+            _carServices.EraseData();
+
+            return View();
+        }
+
+        private IActionResult View()
     {
         throw new NotImplementedException();
     }
