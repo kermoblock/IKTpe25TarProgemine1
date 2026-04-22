@@ -3,32 +3,51 @@
 @{
     ViewData["Title"] = "Student Details";
 }
+
 <h2>Student Details</h2>
 <div>
     <h4>Student</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(Model => Model.LastName)
+            @Html.DisplayNameFor(model => model.LastName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(Model => Model.LastName)
+            @Html.DisplayFor(model => model.LastName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(Model => Model.FirstMidName)
+            @Html.DisplayNameFor(model => model.FirstMidName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayNameFor(Model => Model.FirstMidName)
+            @Html.DisplayFor(model => model.FirstMidName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(Model => Model.EnrollmentDate)
+            @Html.DisplayNameFor(model => model.EnrollmentDate)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayNameFor(Model => Model.EnrollmentDate)
+            @Html.DisplayFor(model => model.EnrollmentDate)
+        </dd>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Coruse Title</th>
+                    <th>Grade</th>
+                </tr>
+                @foreach (var item in Model.EnrollmentsVm)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CourseVm.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Grade)
+                        </td>
+                    </tr>
+                }
+            </table>
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Index">Back To List</a>
+    <a asp-action="Index">Back to List</a>
 </div>
-
