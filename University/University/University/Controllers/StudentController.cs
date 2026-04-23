@@ -134,13 +134,6 @@ namespace University.Controllers
         {
 
             var student = await _context.Students
-            //include lubab kasutada objekti ses
-            .Include(s => s.Enrollments)
-            //kui tahad uuesti objekti kasutada objekti sees, siis kasutad ThenInclude
-            .ThenInclude(e => e.Course)
-            //andmeid ei salvestata vahemällu ja e´i jälgita
-            .AsNoTracking()
-            //leiab esimese vastava elemendi ja tagastab selle
             .FirstOrDefaultAsync(m => m.Id == id);
 
 
