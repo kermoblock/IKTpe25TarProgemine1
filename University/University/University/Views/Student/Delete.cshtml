@@ -1,13 +1,12 @@
-﻿@model University.ViewModel.StudentDetailsViewModel
+﻿@model University.ViewModel.StudentDeleteViewModel
 
 @{
-    ViewData["Title"] = "Student Details";
+    ViewData["Title"] = "Student Delete";
 }
-
 <div>
     <h4>
-        Stu<h2>Student Details</h2>
-        dent
+        Student
+        <h2>Student Delete</h2>
     </h4>
     <hr />
     <dl class="row">
@@ -50,6 +49,17 @@
         </dd>
     </dl>
 </div>
+
+
+
 <div>
     <a asp-action="Index">Back to List</a>
+</div>
+<div>
+    <form asp-action="Delete">
+        <br />
+        <div class="form-group">
+            <input type="Sumbit" value="Delete" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
