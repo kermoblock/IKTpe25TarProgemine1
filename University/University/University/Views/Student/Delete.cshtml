@@ -3,11 +3,10 @@
 @{
     ViewData["Title"] = "Student Delete";
 }
+
+<h2>Student Delete</h2>
 <div>
-    <h4>
-        Student
-        <h2>Student Delete</h2>
-    </h4>
+    <h4>Student</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -31,7 +30,7 @@
         <dd class="col-sm-10">
             <table class="table">
                 <tr>
-                    <th>Coruse Title</th>
+                    <th>Course Title</th>
                     <th>Grade</th>
                 </tr>
                 @foreach (var item in Model.EnrollmentsVm)
@@ -49,17 +48,9 @@
         </dd>
     </dl>
 </div>
-
-
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-<div>
-    <form asp-action="Delete">
-        <br />
-        <div class="form-group">
-            <input type="Sumbit" value="Delete" class="btn btn-primary" />
-        </div>
-    </form>
-</div>
+<hr />
+<form asp-action="DeletePost">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Delete" class="btn btn-danger" />
+    <a asp-action="Index" asp-controller="student" class="btn btn-success">Back to List</a>
+</form>

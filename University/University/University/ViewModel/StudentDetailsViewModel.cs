@@ -10,7 +10,6 @@ namespace University.ViewModel
         public DateTime EnrollmentDate { get; set; }
 
         public ICollection<EnrollmentViewModel> EnrollmentsVm { get; set; }
-
     }
 
     public class EnrollmentViewModel
