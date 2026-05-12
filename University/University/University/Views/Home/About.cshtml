@@ -1,0 +1,36 @@
+﻿@model IEnumerable<University.ViewModel.EnrollmentDateGroupViewModel>
+
+@{
+    ViewData["Title"] = "Student Body Statistics";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr />
+    <dd class="col-sm-10">
+        <table class="table">
+            <tr>
+                <th>Enrollment</th>
+                <th>Date Students</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EnrollmentDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentCount)
+                    </td>
+                </tr>
+            }
+        </table>
+    </dd>
+</dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+
