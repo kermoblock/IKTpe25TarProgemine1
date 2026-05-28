@@ -60,9 +60,34 @@ namespace University.Controllers
                         DepartmentName = c.Departments != null ? c.Departments.Name : null
                     }
                 })
-            .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync();
 
             return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(CourseUpdateViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var course = new Course
+                {
+                    CourseId = vm.CourseId,
+                    Title = vm.Title,
+                    Credits = vm.Credits,
+                    Departments = new Department
+                    {
+                        Name = vm.Department.DepartmentName
+                    }
+                };
+
+                _context.Update(course);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
