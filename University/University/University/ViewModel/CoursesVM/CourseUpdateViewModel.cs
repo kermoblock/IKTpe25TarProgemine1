@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using University.Models;
+using University.ViewModel.CourseVM;
 
-namespace University.ViewModel.CourseVM
+namespace University.ViewModel.CoursesVM
 {
-    public class CourseIndexViewModel
+    public class CourseUpdateViewModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "Number")]
@@ -13,11 +13,5 @@ namespace University.ViewModel.CourseVM
         public int Credits { get; set; }
         public int DepartmentId { get; set; }
         public CourseDepartmentIndexViewModel Department { get; set; }
-
-    }
-
-    public class CourseDepartmentIndexViewModel
-    {
-        public string DepartmentName { get; set; }
     }
 }

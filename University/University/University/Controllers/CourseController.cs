@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using University.Data;
+using University.Models;
+using University.ViewModel;
+using University.ViewModel.CoursesVM;
+using University.ViewModel.CourseVM;
 
 namespace University.Controllers
 {
@@ -9,6 +13,7 @@ namespace University.Controllers
         //on vaja kutsuda välja University constructor
 
         private readonly UniversityContext _context;
+        private object course;
 
         public CourseController
             (
@@ -20,12 +25,44 @@ namespace University.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var result = await _context.Courses
-                .Include(c => c.Departments)
-                .AsNoTracking()
-                .ToListAsync();
+        var Course = _context.Courses
+            .Select(c => new CourseIndexViewModel
+            {
+                CourseId = c.CourseId,
+                Title = c.Title,
+                Credits = c.Credits,
+                DepartmentId = c.DepartmentId,
+                Department = new CourseDepartmentIndexViewModel
+                {
+                    DepartmentName = c.Departments.Name
+                }
+            });
+            return View(Course);
+        }
 
-            return View(result);
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var vm = await _context.Courses
+                .Where(c => c.CourseId == id)
+                .Select(c => new CourseUpdateViewModel
+                {
+                    CourseId = c.CourseId,
+                    Title = c.Title,
+                    Credits = c.Credits,
+                    Department = new CourseDepartmentIndexViewModel
+                    {
+                        DepartmentName = c.Departments != null ? c.Departments.Name : null
+                    }
+                })
+            .FirstOrDefaultAsync();
+
+            return View(vm);
         }
     }
 }
