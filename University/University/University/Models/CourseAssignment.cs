@@ -1,6 +1,4 @@
-﻿using Microsoft.Identity.Client;
-
-namespace University.Models
+﻿namespace University.Models
 {
     public class CourseAssignment
     {

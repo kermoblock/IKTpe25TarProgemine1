@@ -9,14 +9,15 @@ namespace University.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly UniversityContext _context;
+
         public HomeController
-    (
-        UniversityContext context
-    )
+            (
+                UniversityContext context
+            )
         {
             _context = context;
         }
-        private readonly UniversityContext _context;
 
         public IActionResult Index()
         {
@@ -27,7 +28,6 @@ namespace University.Controllers
         {
             return View();
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -46,8 +46,6 @@ namespace University.Controllers
                     EnrollmentDate = dateGroup.Key,
                     StudentCount = dateGroup.Count(),
                 };
-
-            //teha About vaade, mis kuvab üliõpilaste registreerimise kuupäeva järgi
 
             return View(await data.AsNoTracking().ToListAsync());
         }

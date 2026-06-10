@@ -21,6 +21,7 @@ namespace University.Controllers
 
         public async Task<IActionResult> Index(string sortOrder, string searchString, int? pageNumber, string currentFilter)
         {
+
             ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
             ViewData["CurrentFilter"] = searchString;
@@ -152,7 +153,7 @@ namespace University.Controllers
         public async Task<IActionResult> Create(StudentCreateViewModel vm)
         {
             //kui model on valiidne, siis loome uue student'i ja salvestame selle andmebaasi
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var student = new Models.Student
                 {

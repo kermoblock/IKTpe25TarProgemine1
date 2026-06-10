@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace University.Utilities
 {
-    public class PaginatedList<T> : List<T>    
+    public class PaginatedList<T> : List<T>
     {
         public int PageIndex { get; private set; }
         public int TotalPages { get; private set; }
+
         public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
         {
             PageIndex = pageIndex;
@@ -23,6 +22,7 @@ namespace University.Utilities
         {
             var count = await source.CountAsync();
             var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            //lõppu on vaja teha return
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
 

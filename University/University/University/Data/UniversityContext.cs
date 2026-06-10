@@ -13,8 +13,8 @@ namespace University.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
+        public DbSet<OfficeAssignment> OfficeAssignments { get; set; }
         public DbSet<CourseAssignment> CourseAssignments { get; set; }
-        public DbSet<OfficeAsignment> OfficeAssignments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,8 +23,8 @@ namespace University.Data
             modelBuilder.Entity<Student>().ToTable("Student");
             modelBuilder.Entity<Department>().ToTable("Department");
             modelBuilder.Entity<Instructor>().ToTable("Instructor");
-            modelBuilder.Entity<CourseAssignment>().ToTable("CourseAssignment");
-            modelBuilder.Entity<OfficeAsignment>().ToTable("OfficeAssignment");
+            modelBuilder.Entity<OfficeAssignment>().ToTable("OfficeAssignments");
+            modelBuilder.Entity<CourseAssignment>().ToTable("CourseAssignments");
 
             modelBuilder.Entity<CourseAssignment>()
                 .HasKey(c => new { c.CourseId, c.InstructorId });

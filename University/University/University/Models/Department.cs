@@ -13,11 +13,10 @@ namespace University.Models
         public decimal Budget { get; set; }
         public DateTime StartDate { get; set; }
 
-        //? tähendab, et väli võib olla null, st see ei ole koustuslik
+        //? tähendab, et see väli võib olla null, st see ei ole kohustuslik
         public int? InstructorId { get; set; }
 
         public Instructor Administrator { get; set; }
         public ICollection<Course> Courses { get; set; }
-
     }
 }
