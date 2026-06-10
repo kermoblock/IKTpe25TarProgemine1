@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using University.Data;
 using University.Models;
-using University.ViewModel.CoursesVM.CourseUpdateViewModel;
 using University.ViewModel.CourseVM;
 
 namespace University.Controllers
