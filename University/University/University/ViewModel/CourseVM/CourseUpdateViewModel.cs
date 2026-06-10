@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using University.ViewModel.CourseVM;
 
-namespace University.ViewModel.CourseVM
+namespace University.ViewModel.CoursesVM.CourseUpdateViewModel
 {
     public class CourseUpdateViewModel
     {
@@ -11,7 +12,6 @@ namespace University.ViewModel.CourseVM
         public string Title { get; set; }
         public int Credits { get; set; }
         public int DepartmentId { get; set; }
-
         public CourseDepartmentIndexViewModel Department { get; set; }
     }
 }
