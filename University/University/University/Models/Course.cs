@@ -10,9 +10,6 @@ namespace University.Models
         public int Credits { get; set; }
         public int DepartmentId { get; set; }
 
-        public List<IFormFile> Files { get; set; }
-        public IEnumerable<FileToApi> FiletoApis { get; set; }
-            = new List<FileToApi>();
 
         public Department Departments { get; set; }
         public ICollection<Enrollment> Enrollments { get; set; }

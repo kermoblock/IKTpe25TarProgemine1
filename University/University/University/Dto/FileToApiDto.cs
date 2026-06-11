@@ -1,9 +1,9 @@
-﻿namespace University.Models
+﻿namespace University.Dto
 {
-    public class FileToApi
+    public class FileToApiDto
     {
         public Guid Id { get; set; }
         public string? ExistingFilePath { get; set; }
-        public int CourseId { get; set; }
+        public Guid? CourseId { get; set; }
     }
 }
