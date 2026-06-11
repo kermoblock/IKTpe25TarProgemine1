@@ -100,20 +100,19 @@ namespace University.Controllers
         public async Task<IActionResult> Create(CourseCreateViewModel vm)
         {
 
-            Course course = new Course();
+            var course = new Course
+            {
+                CourseId = vm.CourseId,
+                Title = vm.Title,
+                Credits = vm.Credits,
+                DepartmentId = vm.DepartmentId
+            };
 
-            course.CourseId = vm.CourseId;
-            course.Title = vm.Title;
-            course.Credits = vm.Credits;
-            course.DepartmentId = vm.DepartmentId;
-            course.Files
-            _fileServices.FilesToApi(vm, course);
-            
+            await _fileServices.FilesToApi(vm, course);
 
             _context.Add(course);
             await _context.SaveChangesAsync();
 
-            PopulateDepartmentDropDownList(course.DepartmentId);
             return RedirectToAction(nameof(Index));
         }
 
