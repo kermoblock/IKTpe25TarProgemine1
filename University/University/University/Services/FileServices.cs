@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using University.Data;
-using University.Dto;
+﻿using University.Data;
 using University.Models;
 using University.ServiceInterface;
+
+
 
 namespace University.Services
 {
@@ -21,59 +21,87 @@ namespace University.Services
             _context = context;
         }
 
-
-        public void FilesToApi(CourseDto dto, Course domain)
+        public async Task AddFilesToCourse(List<IFormFile> files, int courseId)
         {
-            //tingimus kui File ei ole null või on vähemalt rohkem, kui 0 faili, siis hakkab midagi tegema
-            if (dto.Files != null && dto.Files.Count > 0)
+            if (files == null || files.Count == 0)
+                return;
+
+            var folder = Path.Combine(
+                _webHost.ContentRootPath,
+                "wwwroot",
+                "multipleFileUpload");
+
+            if (!Directory.Exists(folder))
             {
-                if (!Directory.Exists(_webHost.ContentRootPath + "\\wwwroot\\multipleFileUpload\\"))
-                {
-                    Directory.CreateDirectory(_webHost.ContentRootPath + "\\wwwroot\\multipleFileUpload\\");
-                }
-
-                foreach (var file in dto.Files)
-                {
-                    string uploadsFolder = Path.Combine(_webHost.ContentRootPath, "wwwroot", "multipleFileUpload");
-                    string uniqueFileName = Guid.NewGuid().ToString() + " - " + file.FileName;
-                    string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                    using (var fileStream = new FileStream(FilePath, FileMode.Create))
-                    {
-                        file.CopyTo(fileStream);
-
-                        FileToApi path = new FileToApi
-                        {
-                            Id = Guid.NewGuid(),
-                            ExistingFilePath = uniqueFileName,
-                            CourseId = domain.CourseId
-                        };
-
-                        _context.FileToApis.Add(path);
-                    }
-                }
+                Directory.CreateDirectory(folder);
             }
+
+            foreach (var file in files)
+            {
+                string uniqueFileName =
+                    Guid.NewGuid() + "-" + file.FileName;
+
+                string filePath = Path.Combine(folder, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                var entity = new FileToApi
+                {
+                    Id = Guid.NewGuid(),
+                    ExistingFilePath = uniqueFileName,
+                    CourseId = courseId
+                };
+
+                _context.FileToApis.Add(entity);
+            }
+
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<FileToApi?> RemoveImageFromApi(FileToApiDto dto)
+        public async Task RemoveImagesFromApi(List<FileToApi> files)
         {
-            //kui soovin kustutada, siis pean läbi Id pildi ülesse otsima
-            var imageId = await _context.FileToApis
-                .FirstOrDefaultAsync(x => x.Id == dto.Id);
+            if (files == null || files.Count == 0)
+                return;
 
-            //nüüd ostib faili ülesse apis ja see kustutatakse
-            var filePath = _webHost.ContentRootPath + "\\wwwroot\\multipleFileUpload\\"
-                + imageId.ExistingFilePath;
+            foreach (var file in files)
+            {
+                var filePath = Path.Combine(
+                    _webHost.ContentRootPath,
+                    "wwwroot",
+                    "multipleFileUpload",
+                    file.ExistingFilePath);
+
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+            }
+
+            _context.FileToApis.RemoveRange(files);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task RemoveFileFromApi(FileToApi file)
+        {
+            if (file == null)
+                return;
+
+            var filePath = Path.Combine(
+                _webHost.ContentRootPath,
+                "wwwroot",
+                "multipleFileUpload",
+                file.ExistingFilePath);
 
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
             }
 
-            _context.FileToApis.Remove(imageId);
+            _context.FileToApis.Remove(file);
             await _context.SaveChangesAsync();
-
-            return null;
         }
     }
 }

@@ -12,7 +12,7 @@ using University.Data;
 namespace University.Migrations
 {
     [DbContext(typeof(UniversityContext))]
-    [Migration("20260611080815_FilesApi")]
+    [Migration("20260611080700_FilesApi")]
     partial class FilesApi
     {
         /// <inheritdoc />
